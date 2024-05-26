@@ -91,7 +91,7 @@ def main():
         html.Div(id='output4'),
         dash_echarts.DashECharts(
             option=option,
-            id='echarts',
+            id='myecharts',
             funs={
                 "ttt":
                 '''
@@ -104,18 +104,20 @@ def main():
             },
             fun_values=['ttt'],
 
-            style={
-                "width": '100vw',
-                "height": '100vh',
-            }
+            # style={
+            #     "width": '100vw',
+            #     "height": '100vh',
+            #     "width": '100%',
+            #     "height": '100%',
+            # }
         ),
-    ])
+    ],style={'width':'400px','height':'400px'})
 
 
     app.run_server(debug=True)
 @callback(
     Output('output', 'children'),
-    [Input('echarts', 'click_data')])
+    [Input('myecharts', 'click_data')])
 def update(data):
     print("click_data",data)
     if data:
@@ -124,19 +126,19 @@ def update(data):
 
 @callback(
     Output('output2', 'children'),
-    [Input('echarts', 'selected_data')])
+    [Input('myecharts', 'selected_data')])
 def update2(data):
     print("selected_data",data)
     return 'not clicked!'
 @callback(
     Output('output3', 'children'),
-    [Input('echarts', 'brush_data')])
+    [Input('myecharts', 'brush_data')])
 def update3(data):
     print("brush_data",data)
     return 'not clicked!'
 @callback(
     Output('output4', 'children'),
-    [Input('echarts', 'n_clicks')])
+    [Input('myecharts', 'n_clicks')])
 def update4(data):
     print("event",data)
     return 'not clicked!'
